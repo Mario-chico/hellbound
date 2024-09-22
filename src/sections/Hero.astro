@@ -1,0 +1,52 @@
+---
+
+---
+
+<section>
+  <img
+    class="hero-image"
+    src="/hipertrophy.webp"
+    alt="Hero image"
+  />
+  <h1>Calisthenics Events</h1>
+  <p>Welcome to the major event of this month.</p>
+  <time datetime="2023-04-15T14:00">April 15th, 2:00 PM</time>
+  <p>Location: <span class="location">Bosques de Arag n, Cuajimalpa, 05120 Ciudad de Mexico</span></p>
+
+  <a href="https://tienda.eventbrite.com.mx/eventos/calistenia/entradas/574115333377" target="_blank" rel="noopener noreferrer">
+    <button class="button">Buy your tickets</button>
+  </a>
+</section>
+
+<style>
+  
+  .hero-image {
+    width: 100vw;
+    height: auto;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: -1;
+  }
+  h1, p, time {
+    position: relative;
+  }
+  h1, p:first-of-type {
+    text-align: center;
+  }
+  time, p:nth-of-type(2) {
+    text-align: center;
+    margin-top: 24px;
+  }
+  .button {
+    background-color: red;
+    color: white;
+    text-align: center;
+    padding: 1em 2em;
+    border-radius: 4px;
+    display: block;
+    margin: 1em auto;
+  }
+</style>
+
