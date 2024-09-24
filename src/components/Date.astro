@@ -1,0 +1,32 @@
+---
+interface Props {
+  wrapperClassName: string;
+  dateType: string;
+  attribute: Record<string, string>;
+  max: number;
+  position?: string;
+  className?: string;
+  height: string;
+}
+
+const { wrapperClassName, dateType, attribute, max, position, className, height } = Astro.props;
+const maximumSplit = Astro.props.max.toString().split('');
+
+const maxFirst = Number.parseInt(maximumSplit[0]) + 1;
+const maxSecond = 9;
+const maxThird = 9;
+
+const firstDigitHeight = (1 / (maxFirst + 1)) * 100;
+const secondDigitHeight = (1 / (maxSecond + 1)) * 100;
+const thirdDigitHeight = (1 / (maxThird + 1)) * 100;
+---
+
+<div class={className}>
+  <span {...attribute}>00</span>
+  <span>{dateType}</span>
+</div>
+<style>
+  .days {
+    color: red;
+  }  
+</style>

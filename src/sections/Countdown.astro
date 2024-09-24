@@ -1,0 +1,114 @@
+---
+import Date from "../components/Date.astro";
+const TIME_DATE_END = 1732212000000;
+---
+<section>
+  <p class="countdown-text"> Para el evento faltan</p>
+  <div data-date={TIME_DATE_END} role="timer">
+    <Date 
+      dateType="Días"
+      attribute={{"data-days": ""}}
+      className="days"
+      wrapperClassName="wrapper"
+      max={129}
+      height="100%"
+    />
+    <Date 
+    dateType="Horas"
+    attribute={{"data-hours": ""}}
+    className="hours"
+    wrapperClassName="wrapper"
+    max={129}
+    height="100%"
+  />
+  <Date 
+      dateType="Minutos"
+      attribute={{"data-minutes": ""}}
+      className="minutes"
+      wrapperClassName="wrapper"
+      max={129}
+      height="100%"
+    />
+    <Date 
+      dateType="Segundos"
+      attribute={{"data-seconds": ""}}
+      className="seconds"
+      wrapperClassName="wrapper"
+      max={129}
+      height="100%"
+    />
+  </div>
+</section>
+<style>
+  div[data-date] {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+  }
+  
+</style>
+<script>
+  import createCountdown from "../lib/countdown"
+  import {$} from "../lib/dom-selector"
+
+  const SECOND = 1000
+	const MINUTE = SECOND * 60
+	const HOUR = MINUTE * 60
+	const DAY = HOUR * 24
+
+	function init() {
+		const $countdown = document.querySelector("[data-date]")
+		if (!$countdown) return
+
+		let intervalId: number
+
+		const $days = $countdown.querySelector("[data-days]")
+		const $hours = $countdown.querySelector("[data-hours]")
+		const $minutes = $countdown.querySelector("[data-minutes]")
+		const $seconds = $countdown.querySelector("[data-seconds]")
+
+		const timestamp = $countdown.getAttribute("data-date")
+		if (!timestamp) return
+
+		const date = new Date(+timestamp).getTime()
+
+		const formatTime = (time: number) => {
+			return Math.floor(time).toString().padStart(2, "0")
+		}
+
+		function updateCountdown() {
+			const now = Date.now()
+			const diff = date - now
+			const $countdown = document.querySelector("[data-date]")
+			if (!$countdown) return
+
+			if ($days instanceof HTMLElement) {
+				$days.innerText = formatTime(diff / DAY)
+			}
+
+			if ($hours instanceof HTMLElement) {
+				$hours.innerText = formatTime((diff % DAY) / HOUR)
+			}
+
+			if ($minutes instanceof HTMLElement) {
+				$minutes.innerText = formatTime((diff % HOUR) / MINUTE)
+			}
+
+			if ($seconds instanceof HTMLElement) {
+				$seconds.innerText = formatTime((diff % MINUTE) / SECOND)
+			}
+
+			if (diff < 1000) {
+				clearInterval(intervalId)
+
+				$countdown.innerHTML = "¡Ha comenzado! 🎉"
+      }
+		}
+
+		intervalId = setInterval(updateCountdown, SECOND)
+		updateCountdown()
+	}
+
+	init()
+  </script>
