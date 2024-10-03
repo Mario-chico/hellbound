@@ -1,0 +1,18 @@
+---
+import { ATHLETES } from "../const/athletes";
+const listOfAthletes = ATHLETES.map((athlete) => {
+  return {...athlete}
+});
+---
+
+<section>
+  <h2>Selecciona un atleta</h2>
+  <div>
+    <header>
+      <img class="athlete-img" alt=`Fotografia de ${listOfAthletes[0].name}`  src="Mario-2-removebg-preview.png"/>
+    </header>
+    <aside>
+      
+    </aside>
+  </div>
+</section>

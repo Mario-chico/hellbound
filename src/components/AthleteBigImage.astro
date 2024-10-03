@@ -1,0 +1,38 @@
+---
+interface Props {
+	readonly id: string
+	readonly name: string
+	readonly country: string
+	readonly countryName?: string
+	readonly loading?: "lazy" | "eager"
+}
+
+const { name, id, loading } = Astro.props
+---
+
+<picture
+	class:list={"boxer-photo -z-20 aspect-[285/428] h-auto w-full max-w-[460px]"}
+	transition:name="boxer-big-image"
+>
+	<img
+		decoding="async"
+		class="aspect-[285/428] h-auto w-full object-contain"
+		alt={`Fotografía de ${name}`}
+		src={`https://cdn.lavelada.dev/boxers/${id}-big.webp`}
+		style="
+			filter: drop-shadow(0 0 5px rgba(0, 0, 0, .5));
+			mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+		"
+		loading={loading}
+	/>
+</picture>
+
+<div
+	class="absolute bottom-10 z-10 flex max-w-md flex-col items-center justify-center text-wrap md:-bottom-32"
+	transition:name="boxer-name"
+>
+</div>
+
+<style>
+	
+</style>
