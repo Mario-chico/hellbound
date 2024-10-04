@@ -1,0 +1,23 @@
+---
+import AthleteBigImage from "../../components/AthleteBigImage.astro";
+import { ATHLETES } from "../../const/athletes";
+import Layout from "../../layouts/Layout.astro";
+
+export function getStaticPaths()  {
+  return ATHLETES.map(({id}) => {
+    return {params: {id}}
+  })
+}
+const {id} = Astro.params;
+const [athlete] = ATHLETES.filter(athlete => athlete.id === id);
+
+export const prerender = true
+---
+<Layout title={`${athlete.name} - Hellbound Cup`}>
+  <main>
+    <AthleteBigImage 
+      id={id}
+      name={athlete.name}
+      loading="eager" />
+  </main>
+</Layout>

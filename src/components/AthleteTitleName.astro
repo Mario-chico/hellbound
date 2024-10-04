@@ -1,0 +1,24 @@
+---
+interface Props {
+  readonly name: string;
+}
+const {name} = Astro.props;
+const splitName = name.split(" ") ?? [];
+const lastName = splitName[splitName.length - 1];
+const firstName = splitName.slice(0, splitName.length - 1).join(" ");
+---
+
+<span>
+  <span>{firstName?.toLocaleLowerCase()}</span> 
+  <span>{lastName?.toLocaleLowerCase()}</span>
+</span>
+
+<style>
+  span:first-of-type {
+    display: flex;
+    flex-direction: column;
+  }
+  span + span {
+    font-size: xx-large;
+  }
+</style>

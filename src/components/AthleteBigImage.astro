@@ -1,9 +1,9 @@
 ---
+import AthleteTitleName from './AthleteTitleName.astro'
+
 interface Props {
 	readonly id: string
 	readonly name: string
-	readonly country: string
-	readonly countryName?: string
 	readonly loading?: "lazy" | "eager"
 }
 
@@ -11,28 +11,49 @@ const { name, id, loading } = Astro.props
 ---
 
 <picture
-	class:list={"boxer-photo -z-20 aspect-[285/428] h-auto w-full max-w-[460px]"}
-	transition:name="boxer-big-image"
+	class="athlete-photo"
+	transition:name="athlete-big-image"
 >
 	<img
 		decoding="async"
-		class="aspect-[285/428] h-auto w-full object-contain"
+		class="athlete-image"
 		alt={`Fotografía de ${name}`}
-		src={`https://cdn.lavelada.dev/boxers/${id}-big.webp`}
-		style="
-			filter: drop-shadow(0 0 5px rgba(0, 0, 0, .5));
-			mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
-		"
+		src={`athletes/${id}-big.png`}
 		loading={loading}
 	/>
 </picture>
 
 <div
-	class="absolute bottom-10 z-10 flex max-w-md flex-col items-center justify-center text-wrap md:-bottom-32"
-	transition:name="boxer-name"
+	transition:name="athlete-name"
 >
+	<AthleteTitleName name={name} />
 </div>
 
 <style>
-	
+	.athlete-photo {
+		z-index: 20;
+		aspect-ratio: 285/428;
+		height: auto;
+		width: 100%;
+		max-width: 460px;
+	}
+	.athlete-image {
+		aspect-ratio: 285/428;
+		height: auto;
+		width: 100%;
+		object-fit: contain;
+		filter: drop-shadow(0 0 5px rgba(0, 0, 0, .5));
+		mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+	}
+	div {
+		position: absolute;
+		bottom: 10px;
+		z-index: 10;
+		display: flex;
+		max-width: 28rem;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		text-align: center;
+	}
 </style>

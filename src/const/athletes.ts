@@ -1,25 +1,26 @@
-export const ATHLETES = [
+import { type Athletes } from "../types/Athletes";
+export const ATHLETES: Athletes[] = [
   {
     id: "mario",
-    name: "Mario",
+    name: "Mario Chico",
     weight: 65,
     category: "streelifting",
   },
   {
-    id: "luigi",
-    name: "Luigi",
+    id: "alfredo",
+    name: "Alfredo",
     weight: 60,
     category: "streelifting",
   },
   {
-    id: "yoshi",
-    name: "Yoshi",
+    id: "jony",
+    name: "Jony Workout",
     weight: 55,
     category: "streelifting",
   },
   {
-    id: "peach",
-    name: "Peach",
+    id: "vale",
+    name: "Vale",
     weight: 50,
     category: "power freestyle",
   },
