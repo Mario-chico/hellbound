@@ -1,4 +1,4 @@
-export type AthleteGender = "masculino" | "feminino";
+export type AthleteGender = "masculino" | "femenino";
 
 export interface Athletes {
   id: string;

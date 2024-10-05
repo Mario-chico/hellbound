@@ -1,12 +1,13 @@
 ---
 import AthleteBigImage from "../components/AthleteBigImage.astro";
+import AthleteList from "../components/AthleteList.astro";
 import { ATHLETES } from "../const/athletes";
 const listOfAthletes = ATHLETES.map((athlete) => {
   return {...athlete}
 });
 const selectedAthleteId = Astro.url.searchParams.get("athlete");
-const selectedAtlete = listOfAthletes.find(({id}) => id === selectedAthleteId) || listOfAthletes[0];
-console.log("esto aparece aqui " + listOfAthletes);
+const selectedAthlete = listOfAthletes.find(({id}) => id === selectedAthleteId) || listOfAthletes[0];
+console.log("esto aparece aqui " + selectedAthlete.id);
 ---
 
 <section>
@@ -14,61 +15,21 @@ console.log("esto aparece aqui " + listOfAthletes);
   <div>
     <article>
       <AthleteBigImage 
-        id={selectedAtlete.id}
-        name={selectedAtlete.name}
+        id={selectedAthlete.id}
+        name={selectedAthlete.name}
         loading={selectedAthleteId ? "lazy" : "eager"}
         />
     </article>
     <div class="athletes-div">
       <nav class="athletes-list">
-        <div class="athlete-small-container">
-          <a href="google.com">
-            <div class="athlete-link-bg"></div>
-            <img src="athletes/mario-big.png" alt="foto perrona" width="112" height="112">
-          </a>
-          <a href="google.com">
-            <div class="athlete-link-bg"></div>
-            <img src="athletes/alfredo-big.png" alt="foto perrona" width="112" height="112">
-          </a>
-          <a href="google.com">
-            <div class="athlete-link-bg"></div>
-            <img src="athletes/jony-big.png" alt="foto perrona" width="112" height="112">
-          </a>
-          <a href="google.com">
-            <div class="athlete-link-bg"></div>
-            <img src="athletes/vale-big.png" alt="foto perrona" width="112" height="112">
-          </a>
-          <a href="google.com">
-            <div class="athlete-link-bg"></div>
-            <img src="athletes/andy-big.png" alt="foto perrona" width="112" height="112">
-          </a>
-          <a href="google.com">
-            <div class="athlete-link-bg"></div>
-            <img src="athletes/mario-big.png" alt="foto perrona" width="112" height="112">
-          </a>
-          <a href="google.com">
-            <div class="athlete-link-bg"></div>
-            <img src="athletes/mario-big.png" alt="foto perrona" width="112" height="112">
-          </a>
-          <a href="google.com">
-            <div class="athlete-link-bg"></div>
-            <img src="athletes/mario-big.png" alt="foto perrona" width="112" height="112">
-          </a>
-          <a href="google.com">
-            <div class="athlete-link-bg"></div>
-            <img src="athletes/mario-big.png" alt="foto perrona" width="112" height="112">
-          </a>
-          <a href="google.com">
-            <div class="athlete-link-bg"></div>
-            <img src="athletes/mario-big.png" alt="foto perrona" width="112" height="112">
-          </a>
-        </div>
+        <AthleteList athletes={listOfAthletes} selectedAthlete={selectedAthlete} imgLoading={selectedAthleteId ? "lazy" : "eager"} />
       </nav>
     </div>
   </div>
 </section>
 <style>
   section{
+    
   	transform: translate3d(0,0,0)rotate(0)skewX(0)skewY(0)scaleX(1)scaleY(1);
   }
   div {
@@ -87,16 +48,6 @@ console.log("esto aparece aqui " + listOfAthletes);
     gap: 2rem;
     position: relative;
   }
-  a{
-    position: relative;
-  }
-  img {
-    aspect-ratio: 1;
-    object-fit: contain;
-    filter: grayscale();
-    mask-image: linear-gradient(#000 85%, #0000 100%);
-    z-index: 20;
-  }
   .athletes-div {
     position: relative;
     width: 100%;
@@ -104,23 +55,7 @@ console.log("esto aparece aqui " + listOfAthletes);
     display: flex;
   }
   .athletes-list{
-    display: flex;
-    width: 100vw;
     position: relative;
-  }
-  .athlete-small-container {
-    display: flex;
-    flex-direction: row;
-    margin-top: 12px;
-  }
-  .athlete-link-bg {
-    opacity: 0.25;
-    background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0.5) 30%, rgba(0,0,0,0) 95%);
-    width: 100%;
-    height: 60%;
-    display: block;
-    position: absolute;
-    bottom: 0;
   }
   @media screen and (min-width: 768px) {
     section{

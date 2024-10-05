@@ -11,14 +11,14 @@ const { name, id, loading } = Astro.props
 ---
 
 <picture
-	class="athlete-photo"
+	class="athlete-picture"
 	transition:name="athlete-big-image"
 >
 	<img
 		decoding="async"
 		class="athlete-image"
 		alt={`Fotografía de ${name}`}
-		src={`athletes/${id}-big.png`}
+		src={`/athletes/${id}-big.png`}
 		loading={loading}
 	/>
 </picture>
@@ -30,7 +30,7 @@ const { name, id, loading } = Astro.props
 </div>
 
 <style>
-	.athlete-photo {
+	.athlete-picture {
 		z-index: 20;
 		aspect-ratio: 285/428;
 		height: auto;
