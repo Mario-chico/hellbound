@@ -5,9 +5,10 @@ import { ATHLETES } from "../const/athletes";
 const listOfAthletes = ATHLETES.map((athlete) => {
   return {...athlete}
 });
-const selectedAthleteId = Astro.url.searchParams.get("athlete");
-const selectedAthlete = listOfAthletes.find(({id}) => id === selectedAthleteId) || listOfAthletes[0];
-console.log("esto aparece aqui " + selectedAthlete.id);
+const selectedAthleteId = Astro.url.searchParams.get("id");
+console.log(Astro.url.searchParams.keys)
+const selectedAthlete = listOfAthletes.find(({id}) => id === selectedAthleteId) || listOfAthletes[1];
+console.log("esto aparece aqui " + selectedAthleteId);
 ---
 
 <section>
@@ -27,6 +28,39 @@ console.log("esto aparece aqui " + selectedAthlete.id);
     </div>
   </div>
 </section>
+<script >
+  import {$, $$} from "../lib/dom-selector"
+    
+  
+    const athleteLinks = $$(".athlete-link") as globalThis.NodeListOf<HTMLAnchorElement>;
+    const athletesNav = $(".athletes-nav");
+
+    
+    // const athletePicture = $(".athlete-picture") as HTMLPictureElement;
+    const athleteImage =$(".athlete-image") as HTMLImageElement;
+    const athleteTitle = $(".athlete-title") as HTMLSpanElement;
+    
+    
+    athleteLinks.forEach(link => {
+      link.addEventListener("mouseenter", (event) => {
+        const { id, name, weight, category, gender } = (event.currentTarget as HTMLElement)?.dataset;
+        
+        const splitName = name?.split(" ");
+        const lastName = splitName[splitName.length - 1];
+        const firstName = splitName.slice(0, splitName.length - 1).join(" ");
+
+        const spanNames = `
+          <span>${firstName?.toLocaleLowerCase()}</span> 
+          <span>${lastName?.toLocaleLowerCase()}</span>
+          `;
+
+        const athleteSrc = `/athletes/${id}-big.png`
+        athleteTitle.innerHTML = spanNames;
+        athleteImage.src = athleteSrc;
+
+      })
+    })
+</script>
 <style>
   section{
     
