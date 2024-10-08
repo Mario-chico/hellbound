@@ -5,10 +5,16 @@ import { ATHLETES } from "../const/athletes";
 const listOfAthletes = ATHLETES.map((athlete) => {
   return {...athlete}
 });
+console.log("URL completa:", Astro.url.toString());
+console.log("Todos los parámetros:", Object.fromEntries(Astro.url.searchParams));
+console.log("Valor de athletes:", Astro.url.searchParams.get("athlete"));
 const selectedAthleteId = Astro.url.searchParams.get("id");
-console.log(Astro.url.searchParams.keys)
-const selectedAthlete = listOfAthletes.find(({id}) => id === selectedAthleteId) || listOfAthletes[1];
-console.log("esto aparece aqui " + selectedAthleteId);
+console.log(selectedAthleteId)
+for (const a of listOfAthletes) {
+  console.log(a.id)
+}
+const selectedAthlete = listOfAthletes.find(({id}) => id === selectedAthleteId) || listOfAthletes[2];
+console.log("esto aparece aqui " + selectedAthlete.id);
 ---
 
 <section>
@@ -18,48 +24,88 @@ console.log("esto aparece aqui " + selectedAthleteId);
       <AthleteBigImage 
         id={selectedAthlete.id}
         name={selectedAthlete.name}
-        loading={selectedAthleteId ? "lazy" : "eager"}
+        loading={selectedAthleteId ? "eager" : "lazy"}
         />
     </article>
     <div class="athletes-div">
-      <nav class="athletes-list">
-        <AthleteList athletes={listOfAthletes} selectedAthlete={selectedAthlete} imgLoading={selectedAthleteId ? "lazy" : "eager"} />
+      <nav class="athletes-nav">
+        <AthleteList 
+          athletes={listOfAthletes}
+          selectedAthlete={selectedAthlete}
+          imgLoading={!selectedAthleteId ? "lazy" : undefined}
+        />
       </nav>
     </div>
   </div>
 </section>
 <script >
   import {$, $$} from "../lib/dom-selector"
-    
-  
+
+  console.log('aca no hay pedo')
+  document.addEventListener("astro:page-load", () => {
+    console.log("page loaded");
     const athleteLinks = $$(".athlete-link") as globalThis.NodeListOf<HTMLAnchorElement>;
-    const athletesNav = $(".athletes-nav");
-
-    
-    // const athletePicture = $(".athlete-picture") as HTMLPictureElement;
-    const athleteImage =$(".athlete-image") as HTMLImageElement;
+    const athletesNav = $(".athlete-small-container");
+    const athleteImage =$(".athlete-picture") as HTMLPictureElement;
     const athleteTitle = $(".athlete-title") as HTMLSpanElement;
-    
-    
-    athleteLinks.forEach(link => {
-      link.addEventListener("mouseenter", (event) => {
-        const { id, name, weight, category, gender } = (event.currentTarget as HTMLElement)?.dataset;
-        
-        const splitName = name?.split(" ");
-        const lastName = splitName[splitName.length - 1];
-        const firstName = splitName.slice(0, splitName.length - 1).join(" ");
+    // const athletePicture = $(".athlete-picture") as HTMLPictureElement;
+    if (!athletesNav) return
 
-        const spanNames = `
+
+    const updatedSelectedAthleteId =
+			localStorage.getItem("selected:athlete") ||
+			new URLSearchParams(window.location.search).get("athlete") || "mario"
+
+      const updatedSelectedBoxerElement: HTMLElement | null = $(
+			`.athlete-link[data-id=${updatedSelectedAthleteId}]`
+		)
+		if (updatedSelectedBoxerElement) {
+			activateAthlete(updatedSelectedBoxerElement, updatedSelectedBoxerElement, athletesNav, true)
+		}
+
+    function activateAthlete(
+			element: HTMLElement,
+			link: HTMLElement,
+			nav: HTMLElement,
+			replaceUrl: boolean = false,
+		) {
+			if (element?.classList.contains("active")) return
+
+			const { id, name, } = element?.dataset
+
+			if (!id || !name ) return
+
+			const splitName = name.split(" ")
+			const lastName = splitName[splitName.length - 1]
+			const firstName = splitName.slice(0, splitName.length - 1).join(" ")
+			const spanNames = `
           <span>${firstName?.toLocaleLowerCase()}</span> 
           <span>${lastName?.toLocaleLowerCase()}</span>
           `;
+			nav?.querySelector(".active")?.classList.remove("active")
 
-        const athleteSrc = `/athletes/${id}-big.png`
-        athleteTitle.innerHTML = spanNames;
-        athleteImage.src = athleteSrc;
+			link.classList.add("active")
 
-      })
-    })
+			if (replaceUrl) {
+				history.replaceState({}, "", `?athlete=${id}`)
+			}
+			const athleteSrc = `https://res.cloudinary.com/dliqpogct/image/upload/v1717891805/midjourney/${id}-big`
+      console.log(athleteImage.getElementsByTagName("img")[0]+ 'imagen');
+
+			athleteImage.getElementsByTagName("img")[0].src = `${athleteSrc}.png`
+			athleteTitle.innerHTML = spanNames
+			athleteImage.getElementsByTagName("img")[0].alt = `Fotografía de ${name}`
+
+		}
+    athleteLinks.forEach((link) => {
+			link.addEventListener("mouseenter", (event) => {
+				const currentTarget = event.currentTarget as HTMLElement
+				if (currentTarget.classList.contains("active")) return
+				activateAthlete(currentTarget, link, athletesNav, true)
+			})
+		})
+    
+  }); 
 </script>
 <style>
   section{
