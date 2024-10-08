@@ -6,9 +6,10 @@ interface Props {
   athletes: Athletes[];
   class?: string;
   selectedAthlete: Athletes;
-  imgLoading?: HTMLAttributes<"img">["loading"];
+  imgLoading?: HTMLAttributes<"img">["loading"]
 }
 const { athletes, class: className ="", selectedAthlete, imgLoading } = Astro.props;
+console.log(selectedAthlete.id + ' epa mi colita');
 ---
 <div class="athlete-small-container">
   {
@@ -30,11 +31,11 @@ const { athletes, class: className ="", selectedAthlete, imgLoading } = Astro.pr
         <div class="athlete-link-bg"/>
         <img 
           decoding="async" 
-          loading={imgLoading} 
-          class="athlete-image-small" 
-          src={`athletes/${id}-big.png`} 
+          src={`https://res.cloudinary.com/dliqpogct/image/upload/f_auto,q_auto/v1/midjourney/${id}.png`}
           alt="foto perrona" 
-          width="150" height="150">
+          class="athlete-image-small" 
+          loading={imgLoading} 
+          width="150" height="150"/>
       </a>
     ))
   }
