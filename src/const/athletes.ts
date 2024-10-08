@@ -1,4 +1,4 @@
-import { type Athletes } from "../types/Athletes";
+import { type Athletes } from "@/types/Athletes";
 export const ATHLETES: Athletes[] = [
   {
     id: "mario",
@@ -35,39 +35,39 @@ export const ATHLETES: Athletes[] = [
     category: "power freestyle",
     gender: "femenino"
   },
-  {
-    id: "alfredo",
-    name: "Andrea",
-    weight: 45,
-    category: "power freestyle",
-    gender: "femenino"
-  },
-  {
-    id: "alfredo",
-    name: "Andrea",
-    weight: 45,
-    category: "power freestyle",
-    gender: "femenino"
-  },
-  {
-    id: "alfredo",
-    name: "Andrea",
-    weight: 45,
-    category: "power freestyle",
-    gender: "femenino"
-  },
-  {
-    id: "alfredo",
-    name: "Andrea",
-    weight: 45,
-    category: "power freestyle",
-    gender: "femenino"
-  },
-  {
-    id: "alfredo",
-    name: "Andrea",
-    weight: 45,
-    category: "power freestyle",
-    gender: "femenino"
-  },
-]
+  // {
+  //   id: "alfredo",
+  //   name: "Andrea",
+  //   weight: 45,
+  //   category: "power freestyle",
+  //   gender: "femenino"
+  // },
+  // {
+  //   id: "alfredo",
+  //   name: "Andrea",
+  //   weight: 45,
+  //   category: "power freestyle",
+  //   gender: "femenino"
+  // },
+  // {
+  //   id: "alfredo",
+  //   name: "Andrea",
+  //   weight: 45,
+  //   category: "power freestyle",
+  //   gender: "femenino"
+  // },
+  // {
+  //   id: "alfredo",
+  //   name: "Andrea",
+  //   weight: 45,
+  //   category: "power freestyle",
+  //   gender: "femenino"
+  // },
+  // {
+  //   id: "alfredo",
+  //   name: "Andrea",
+  //   weight: 45,
+  //   category: "power freestyle",
+  //   gender: "femenino"
+  // },
+] as const
