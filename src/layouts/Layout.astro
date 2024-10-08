@@ -1,9 +1,20 @@
 ---
+import type { Preload } from '@/types/Preload';
+
 interface Props {
 	title: string;
+	preload?: Array<Preload>;
+		canonical?: string
 }
 
-const { title } = Astro.props;
+const { title, preload, canonical} = Astro.props;
+
+const determineCanonicalURL = () => {
+	if (Astro.url.host.includes("localhost")) return "http://localhost:4321"
+	return canonical || Astro.url.pathname
+}
+
+const canonicalURL = new URL(determineCanonicalURL(), Astro.site)
 ---
 
 <!doctype html>
@@ -11,9 +22,15 @@ const { title } = Astro.props;
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="description" content="Astro description" />
+		{
+			preload?.map(({ href, as, type, rel = "preload", crossorigin }) => (
+				<link {rel} {href} {as} {type} {crossorigin} />
+			))
+		}
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
+		<link rel="canonical" href={canonicalURL} />
 		<title>{title}</title>
 	</head>
 	<body>
