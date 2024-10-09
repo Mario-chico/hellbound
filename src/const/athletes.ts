@@ -35,13 +35,13 @@ export const ATHLETES: Athletes[] = [
     category: "power freestyle",
     gender: "femenino"
   },
-  // {
-  //   id: "alfredo",
-  //   name: "Andrea",
-  //   weight: 45,
-  //   category: "power freestyle",
-  //   gender: "femenino"
-  // },
+  {
+    id: "andres",
+    name: "Andres",
+    weight: 65,
+    category: "power freestyle",
+    gender: "masculino"
+  },
   // {
   //   id: "alfredo",
   //   name: "Andrea",
