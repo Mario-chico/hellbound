@@ -1,28 +1,28 @@
 ---
-import AthleteBigImage from "../../components/AthleteBigImage.astro";
-import { ATHLETES } from "../../const/athletes";
+import AthleteBigImage from "@/components/AthleteBigImage.astro";
+import { ATHLETES } from "@/const/athletes";
 import type { Preload } from "@/types/Preload";
-import Layout from "../../layouts/Layout.astro";
+import Layout from "@/layouts/Layout.astro";
 
 export function getStaticPaths()  {
-  return ATHLETES.map(({id}) => ({
-    params: {id},
-  }))
+  return ATHLETES.map(({ id }) => {
+    return { params: { id } }
+  })
 }
-const {id} = Astro.params;
+const { id } = Astro.params;
 const [athlete] = ATHLETES.filter((athlete) => athlete.id === id);
 
 const preloadAthleteImage: Preload[] = [
   {
     as: "image",
-    href: `https://res.cloudinary.com/dliqpogct/image/upload/f_auto,q_auto/v1/midjourney/${id}.png`,
-    type: "image/png",
+    href: `/athletes/${id}-big.webp`,
+    type: "image/webp",
     rel: "preload",
   },
 ]
 export const prerender = true;
 ---
-<Layout title={`${athlete.name} - Hellbound Cup`} preload={preloadAthleteImage}>
+<Layout title={`${athlete.name} - Hellbound Cup`} description="El evento mas perro alv" preload={preloadAthleteImage}>
   <main>
     <AthleteBigImage 
       id={id}
@@ -30,8 +30,3 @@ export const prerender = true;
       loading="eager" />
   </main>
 </Layout>
-<script>
-  document.addEventListener("astro:page-load", () => {
-    console.log("page loaded");
-  })
-</script>
