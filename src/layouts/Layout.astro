@@ -1,42 +1,33 @@
 ---
+import { ViewTransitions } from 'astro:transitions';
 import type { Preload } from '@/types/Preload';
+import SEO from '@/components/SEO.astro';
 
 interface Props {
 	title: string;
+	description: string;
 	preload?: Array<Preload>;
-		canonical?: string
+	canonical?: string
 }
 
-const { title, preload, canonical} = Astro.props;
-
-const determineCanonicalURL = () => {
-	if (Astro.url.host.includes("localhost")) return "http://localhost:4321"
-	return canonical || Astro.url.pathname
-}
-
-const canonicalURL = new URL(determineCanonicalURL(), Astro.site)
+const { title, description, preload, canonical} = Astro.props as Props;
 ---
-
 <!doctype html>
 <html lang="en">
 	<head>
-		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description" />
-		{
-			preload?.map(({ href, as, type, rel = "preload", crossorigin }) => (
-				<link {rel} {href} {as} {type} {crossorigin} />
-			))
-		}
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<link rel="canonical" href={canonicalURL} />
-		<title>{title}</title>
+		<SEO 
+			title={title}
+			description={description}
+			preload={preload}
+			canonical={canonical}
+		/>
+		<ViewTransitions />
 	</head>
 	<body>
 		<slot />
 	</body>
 </html>
+
 <style is:global>
 	*{
 		box-sizing: border-box;
