@@ -9,7 +9,6 @@ interface Props {
   imgLoading?: HTMLAttributes<"img">["loading"]
 }
 const { athletes, class: className ="", selectedAthlete, imgLoading } = Astro.props;
-console.log(selectedAthlete.id + ' epa mi colita');
 ---
 <div class="athlete-small-container">
   {
@@ -31,7 +30,7 @@ console.log(selectedAthlete.id + ' epa mi colita');
         <div class="athlete-link-bg"/>
         <img 
           decoding="async" 
-          src={`https://res.cloudinary.com/dliqpogct/image/upload/f_auto,q_auto/v1/midjourney/${id}.png`}
+          src={`/athletes/${id}-big.webp`}
           alt="foto perrona" 
           class="athlete-image-small" 
           loading={imgLoading} 
