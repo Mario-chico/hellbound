@@ -17,7 +17,7 @@ const {
   canonical,
   image = "/hellbound.png"
 } = Astro.props as Props;
-console.log(preload?.map((p) => p.href) + " preload")
+
 const determineCanonicalURL = () => {
 	if (Astro.url.host.includes("localhost")) return "http://localhost:4321"
 	return canonical || Astro.url.pathname

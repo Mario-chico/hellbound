@@ -1,6 +1,6 @@
 ---
 import Date from "../components/Date.astro";
-const TIME_DATE_END = 1732212000000;
+const TIME_DATE_END = 1732212000000 as const;
 ---
 <section>
   <p class="countdown-text"> Para el evento faltan</p>
@@ -60,7 +60,7 @@ const TIME_DATE_END = 1732212000000;
   
 </style>
 <script>
-  import createCountdown from "../lib/countdown"
+  import createCountdown from "@/lib/countdown"
   import {$} from "../lib/dom-selector"
 
   const SECOND = 1000
@@ -69,15 +69,15 @@ const TIME_DATE_END = 1732212000000;
 	const DAY = HOUR * 24
 
 	function init() {
-		const $countdown = document.querySelector("[data-date]")
+		const $countdown = $("[data-date]")
 		if (!$countdown) return
 
 		let intervalId: number
 
-		const $days = $countdown.querySelector("[data-days]")
-		const $hours = $countdown.querySelector("[data-hours]")
-		const $minutes = $countdown.querySelector("[data-minutes]")
-		const $seconds = $countdown.querySelector("[data-seconds]")
+		const $days = $("[data-days]")
+		const $hours = $("[data-hours]")
+		const $minutes = $("[data-minutes]")
+		const $seconds = $("[data-seconds]")
 
 		const timestamp = $countdown.getAttribute("data-date")
 		if (!timestamp) return
@@ -95,20 +95,24 @@ const TIME_DATE_END = 1732212000000;
 			if (!$countdown) return
 
 			if ($days instanceof HTMLElement) {
-				$days.innerText = formatTime(diff / DAY)
+				const newDays = formatTime(diff / DAY)
+        if ($days.innerText !== newDays) $days.innerText = newDays
 			}
 
 			if ($hours instanceof HTMLElement) {
-				$hours.innerText = formatTime((diff % DAY) / HOUR)
-			}
+        const newHours = formatTime((diff % DAY) / HOUR)
+        if ($hours.innerText !== newHours) $hours.innerText = newHours
+      }
 
-			if ($minutes instanceof HTMLElement) {
-				$minutes.innerText = formatTime((diff % HOUR) / MINUTE)
-			}
+      if ($minutes instanceof HTMLElement) {
+        const newMinutes = formatTime((diff % HOUR) / MINUTE)
+        if ($minutes.innerText !== newMinutes) $minutes.innerText = newMinutes
+      }
 
-			if ($seconds instanceof HTMLElement) {
-				$seconds.innerText = formatTime((diff % MINUTE) / SECOND)
-			}
+      if ($seconds instanceof HTMLElement) {
+        const newSeconds = formatTime((diff % MINUTE) / SECOND)
+        if ($seconds.innerText !== newSeconds) $seconds.innerText = newSeconds
+      }
 
 			if (diff < 1000) {
 				clearInterval(intervalId)
