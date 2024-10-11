@@ -1,12 +1,37 @@
 <header>
-  <p class="header-text">Calisthenics Events</p>
+  <a href="/">
+    <img src="https://res.cloudinary.com/dliqpogct/image/upload/f_auto,q_auto/v1/hellbound/logo" alt="logo perron" width="50" height="50">
+  </a>
+  <nav>
+    <ul>
+      <li><a href="/reglamento">Reglamento</a></li>
+      <li><a>Resultados</a></li>
+    </ul>
+  </nav>
 </header>
 <style>
   header {
-    width: 100vw;
+    max-width: 72rem;
+    margin: 0 auto;
+    display: flex;
     height: 50px;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    padding-inline: 1rem;
   }
-  .header-text {
-    font-size: 3rem;
+  ul{
+    display: flex;
+    list-style: none;
+    justify-content: space-evenly;
+    gap: 3rem;
+  }
+  a{
+    font-weight: bold;
+    cursor: pointer;
+    color: white;
+  }
+  a:hover{
+    text-decoration: underline;
   }
 </style>
