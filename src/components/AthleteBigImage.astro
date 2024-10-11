@@ -18,7 +18,7 @@ const { name, id, loading } = Astro.props
 		decoding="async"
 		class="athlete-image"
 		alt={`Fotografía de ${name}`}
-		src={`/athletes/${id}-big.webp`}
+		src={`https://res.cloudinary.com/dliqpogct/image/upload/f_auto,q_auto/v1/hellbound/${id}-big.webp`}
 		loading={loading}
 	/>
 </picture>
@@ -33,7 +33,7 @@ const { name, id, loading } = Astro.props
 	.athlete-picture {
 		z-index: 20;
 		aspect-ratio: 2/3;
-		height: auto;
+		height: 500px;
 		width: 100%;
 		max-width: 460px;
 	}
