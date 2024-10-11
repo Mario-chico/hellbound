@@ -2,6 +2,7 @@
 import { ViewTransitions } from 'astro:transitions';
 import type { Preload } from '@/types/Preload';
 import SEO from '@/components/SEO.astro';
+import Footer from '@/sections/Footer.astro';
 
 interface Props {
 	title: string;
@@ -26,6 +27,7 @@ const { title, description, preload, canonical} = Astro.props as Props;
 	<body>
 		<slot />
 	</body>
+	<Footer/>
 </html>
 
 <style is:global>
@@ -70,5 +72,9 @@ const { title, description, preload, canonical} = Astro.props as Props;
 	}
 	img{
 		display: block;
+	}
+	a{
+		cursor: pointer;
+		text-decoration: none;
 	}
 </style>
