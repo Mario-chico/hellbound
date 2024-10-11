@@ -8,17 +8,25 @@ const lastName = splitName[splitName.length - 1];
 const firstName = splitName.slice(0, splitName.length - 1).join(" ");
 ---
 
-<span class="athlete-title">
-  <span>{firstName?.toLocaleLowerCase()}</span> 
-  <span>{lastName?.toLocaleLowerCase()}</span>
-</span>
+  <span class="athlete-title">
+    <span>{firstName?.toLocaleLowerCase()}</span> 
+    <span>{lastName?.toLocaleLowerCase()}</span>
+  </span>
+
 
 <style>
+  .athlete-title{
+    color: white;
+    font-size: 2rem;
+    text-decoration: none;
+    font-family: 'Cinzel Decorative';
+    font-weight: bold;
+  }
   span:first-of-type {
     display: flex;
     flex-direction: column;
   }
   span + span {
-    font-size: xx-large;
+    font-size: 2.4rem;
   }
 </style>
