@@ -45,6 +45,7 @@ const TIME_DATE_END = 1732212000000 as const;
     grid-template-columns: repeat(1, 1fr);
     grid-column-gap: 0px;
     grid-row-gap: 0px;
+    margin-block: 3rem;
   }
   .countdown-text {
     text-align: center;
@@ -72,7 +73,7 @@ const TIME_DATE_END = 1732212000000 as const;
 		const $countdown = $("[data-date]")
 		if (!$countdown) return
 
-		let intervalId: number
+		let intervalId: any
 
 		const $days = $("[data-days]")
 		const $hours = $("[data-hours]")
@@ -124,6 +125,7 @@ const TIME_DATE_END = 1732212000000 as const;
 		intervalId = setInterval(updateCountdown, SECOND)
 		updateCountdown()
 	}
-
-	init()
+  document.addEventListener("astro:page-load", () => {
+    init()
+  })
   </script>
