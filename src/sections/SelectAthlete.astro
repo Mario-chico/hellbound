@@ -121,8 +121,10 @@ const selectedAthlete = listOfAthletes.find(({id}) => id === selectedAthleteId) 
 			const firstName = splitName.slice(0, splitName.length - 1).join(" ")
 			const spanNames = `
         <a href="/athletes/${id}" class="athlete-link">
-          <span>${firstName?.toLocaleLowerCase()}</span> 
-          <span>${lastName?.toLocaleLowerCase()}</span>
+          <span style="display: flex; flex-direction: column;">
+            <span>${firstName?.toLocaleLowerCase()}</span> 
+            <span style="font-size: 2.4rem;">${lastName?.toLocaleLowerCase()}</span>
+          </span>
         </a>
         `;
 			nav?.querySelector(".active")?.classList.remove("active")
@@ -260,6 +262,7 @@ const selectedAthlete = listOfAthletes.find(({id}) => id === selectedAthleteId) 
   .athletes-list{
     position: relative;
   }
+  
   @media (max-width: 768px) {
 		.carousel {
 			scrollbar-width: none;
