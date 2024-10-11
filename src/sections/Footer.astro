@@ -1,0 +1,43 @@
+---
+import Instagram from "@/icons/Instagram.astro";
+---
+<footer>
+  <section>
+    <span>Hellbound Cup&copy; 2024</span>
+    <a href="https://www.instagram.com/hellboundcup/" target="_blank" rel="noopener noreferrer" onclick="if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+      window.location.href = 'instagram://user?username=hellboundcup';
+      return false;
+    }">
+      <Instagram />
+    </a>
+  </section>
+  <p>Hecho con ❤️‍🔥 por <a href="https://www.instagram.com/mariochicos/" onclick="if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+    window.location.href = 'instagram://user?username=hellboundcup';
+    return false;
+  }" target="_blank" rel="noopener noreferrer">Mario Chico</a></p>
+</footer>
+
+<style>
+  footer {
+    padding: 2rem;
+    font-weight: bold;
+    color: white;
+  }
+  section {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+  p{
+    margin: 0 auto;
+  }
+  a{
+    color: #c66e3c;
+  }
+  @media screen and (min-width: 769px) {
+    footer {
+      margin: 0 auto;
+      max-width: 72rem;
+    }
+  }
+ </style>
