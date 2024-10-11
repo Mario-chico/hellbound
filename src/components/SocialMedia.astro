@@ -1,0 +1,13 @@
+---
+interface Props {
+  href?: string;
+}
+const { href } = Astro.props
+---
+
+<a href={href} target="_blank" rel="noopener noreferrer" onclick="if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+  window.location.href = 'instagram://user?username=hellboundcup';
+  return false;
+}">
+  <slot />
+</a>
