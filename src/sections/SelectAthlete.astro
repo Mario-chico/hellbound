@@ -5,12 +5,7 @@ import { ATHLETES } from "../const/athletes";
 const listOfAthletes = ATHLETES.map((athlete) => {
   return {...athlete}
 });
-console.log('URL completa:', Astro.url.toString());
-console.log("Todos los parámetros:", Object.fromEntries(Astro.url.searchParams));
-console.log("Valor de athlete:", Astro.url.searchParams.get("athlete"));
 const selectedAthleteId = Astro.url.searchParams.get("athlete");
-console.log(selectedAthleteId)
-
 const selectedAthlete = listOfAthletes.find(({id}) => id === selectedAthleteId) || listOfAthletes[0];
 ---
 
@@ -72,7 +67,6 @@ const selectedAthlete = listOfAthletes.find(({id}) => id === selectedAthleteId) 
 			`.athlete-link[data-id=${updatedSelectedAthleteId}]`
 		)
 		if (updatedSelectedAthleteElement) {
-      console.log('sientro ' + updatedSelectedAthleteElement)
 			activateAthlete(updatedSelectedAthleteElement, updatedSelectedAthleteElement, athletesNav, true)
 		}
     // detect with intersection observer that the $boxerNav is in viewport
@@ -169,7 +163,6 @@ const selectedAthlete = listOfAthletes.find(({id}) => id === selectedAthleteId) 
         const { width } = carouselInner.getBoundingClientRect()
         const m = rect.left > width / 2 - rect.width * 0.75 && rect.left < width / 2 + rect.width * 0.25;
         if (rect.left > width / 2 - rect.width * 0.75 && rect.left < width / 2 + rect.width * 0.25) {
-          console.log(m + ' que pues')
           activateAthlete(link, link, carouselInner, false)
         }
       }
@@ -186,11 +179,8 @@ const selectedAthlete = listOfAthletes.find(({id}) => id === selectedAthleteId) 
         const athleteActiveElement = $(`.carousel .athlete-link[data-id=${athlete}]`)
         if (athleteActiveElement) {
           const carouselWidth = carouselInner.clientWidth
-          console.log(carouselWidth + 'w')
           const thumbnailWidth = athleteActiveElement.offsetWidth
-          console.log(thumbnailWidth + 't')
           const currentPosition = athleteActiveElement.offsetLeft - (carouselWidth - thumbnailWidth) / 2
-          console.log(currentPosition + 'c')
   
           carouselInner.scrollTo(currentPosition, 0)
         }
