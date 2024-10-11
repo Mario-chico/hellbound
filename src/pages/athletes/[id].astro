@@ -3,6 +3,9 @@ import AthleteBigImage from "@/components/AthleteBigImage.astro";
 import { ATHLETES } from "@/const/athletes";
 import type { Preload } from "@/types/Preload";
 import Layout from "@/layouts/Layout.astro";
+import Header from "@/sections/Header.astro";
+import SocialMedia from "@/components/SocialMedia.astro";
+import Instagram from "@/icons/Instagram.astro";
 
 export function getStaticPaths()  {
   return ATHLETES.map(({ id }) => {
@@ -23,16 +26,23 @@ const preloadAthleteImage: Preload[] = [
 export const prerender = true
 ---
 <Layout title={`${athlete.name} - Hellbound Cup`} description="El evento mas perro alv" preload={preloadAthleteImage}>
+  <Header />
   <main>
-    <section>
-      <p>Atleta <span>{athlete.name}</span></p>
-      <AthleteBigImage 
+    <article>
+      <section>
+        <AthleteBigImage 
         id={id}
         name={athlete.name}
         loading="eager" />
-    </section>
-    <p>Categoria <span>{athlete.category}</span></p>
-    <p>Peso <span>{athlete.weight}</span></p>
+      </section>
+      <section>
+        <p>Categoria <span>{athlete.category}</span></p>
+        <p>Peso <span>{athlete.weight}</span></p>
+        <SocialMedia href={athlete.socials.instagram} >
+          <Instagram />
+        </SocialMedia>
+      </section>
+    </article>
   </main>
 </Layout>
 <style>
@@ -46,7 +56,22 @@ export const prerender = true
 		line-height: 1.6;
 		position: relative;
 	}
-  section {
-    max-width: 300px;
+  article {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: 10vh;
+  }
+  section:first-of-type{
+    position: relative;
+  }
+  section:last-of-type{
+    
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
   }
 </style>
