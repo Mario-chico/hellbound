@@ -1,24 +1,23 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Hero from '../sections/Hero.astro';
-import Header from '../sections/Header.astro';
-import Countdown from '../sections/Countdown.astro';
-import SelectAthlete from '../sections/SelectAthlete.astro';
+import Layout from '@/layouts/Layout.astro';
+import Hero from '@/sections/Hero.astro';
+import Header from '@/sections/Header.astro';
+import Countdown from '@/sections/Countdown.astro';
+import SelectAthlete from '@/sections/SelectAthlete.astro';
 
 ---
 
-<Layout title="Hellbound Cup 2024" description='Evento de streetlifting y power freestyle'>
-	<!-- <Header /> -->
+<Layout title="Hellbound Cup 2024" description='Evento deportivo de streetlifting y power freestyle'>
+	<Header />
 	<main>
 		<Hero />
-		<!-- <Countdown/> -->
+		<Countdown/>
 		<SelectAthlete />
 	</main>
 </Layout>
 
 <style>
 	main {
-		margin: auto;
 		padding: 1rem;
 		max-width: 72rem;
 		min-height: 100vh;
