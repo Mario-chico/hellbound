@@ -6,4 +6,8 @@ export interface Athletes {
   weight: number;
   category: string;
   gender?: AthleteGender;
+  socials: {
+    instagram?: string;
+    tiktok?: string;
+  }
 }
