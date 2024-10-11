@@ -9,33 +9,21 @@ const TIME_DATE_END = 1732212000000 as const;
       dateType="Días"
       attribute={{"data-days": ""}}
       className="days"
-      wrapperClassName="wrapper"
-      max={129}
-      height="100%"
     />
     <Date 
     dateType="Horas"
     attribute={{"data-hours": ""}}
     className="hours"
-    wrapperClassName="wrapper"
-    max={129}
-    height="100%"
   />
   <Date 
       dateType="Minutos"
       attribute={{"data-minutes": ""}}
       className="minutes"
-      wrapperClassName="wrapper"
-      max={129}
-      height="100%"
     />
     <Date 
       dateType="Segundos"
       attribute={{"data-seconds": ""}}
       className="seconds"
-      wrapperClassName="wrapper"
-      max={129}
-      height="100%"
     />
   </div>
 </section>
@@ -61,7 +49,6 @@ const TIME_DATE_END = 1732212000000 as const;
   
 </style>
 <script>
-  import createCountdown from "@/lib/countdown"
   import {$} from "../lib/dom-selector"
 
   const SECOND = 1000
