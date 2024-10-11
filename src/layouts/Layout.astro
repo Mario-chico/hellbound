@@ -3,6 +3,9 @@ import { ViewTransitions } from 'astro:transitions';
 import type { Preload } from '@/types/Preload';
 import SEO from '@/components/SEO.astro';
 import Footer from '@/sections/Footer.astro';
+import '@fontsource/cinzel-decorative/400.css';
+import '@fontsource/cinzel-decorative/700.css';
+import '@fontsource/cinzel-decorative/900.css';
 
 interface Props {
 	title: string;
@@ -56,15 +59,9 @@ const { title, description, preload, canonical} = Astro.props as Props;
 	main{
 		position: relative;
 	}
-	code {
+	body {
 		font-family:
-			Menlo,
-			Monaco,
-			Lucida Console,
-			Liberation Mono,
-			DejaVu Sans Mono,
-			Bitstream Vera Sans Mono,
-			Courier New,
+			'Cinzel Decorative',
 			monospace;
 	}
 	h1,h2,h3,p{
@@ -76,5 +73,7 @@ const { title, description, preload, canonical} = Astro.props as Props;
 	a{
 		cursor: pointer;
 		text-decoration: none;
+		color: white;
 	}
+	
 </style>
