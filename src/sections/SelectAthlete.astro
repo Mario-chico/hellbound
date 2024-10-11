@@ -85,7 +85,7 @@ const selectedAthlete = listOfAthletes.find(({id}) => id === selectedAthleteId) 
 						// get all images and preload them
 						athleteLinks.forEach((link) => {
 							const { id } = link.dataset
-							const athleteSrc = `/athletes/${id}-big`
+							const athleteSrc = `https://res.cloudinary.com/dliqpogct/image/upload/f_auto,q_auto/v1/hellbound/${id}-big`
 							// create link preload for each image for webp
 							const preloadLink = document.createElement("link")
 							preloadLink.rel = "preload"
@@ -120,9 +120,11 @@ const selectedAthlete = listOfAthletes.find(({id}) => id === selectedAthleteId) 
 			const lastName = splitName[splitName.length - 1]
 			const firstName = splitName.slice(0, splitName.length - 1).join(" ")
 			const spanNames = `
+        <a href="/athletes/${id}" class="athlete-link">
           <span>${firstName?.toLocaleLowerCase()}</span> 
           <span>${lastName?.toLocaleLowerCase()}</span>
-          `;
+        </a>
+        `;
 			nav?.querySelector(".active")?.classList.remove("active")
 
 			link.classList.add("active")
@@ -130,7 +132,7 @@ const selectedAthlete = listOfAthletes.find(({id}) => id === selectedAthleteId) 
 			if (replaceUrl) {
 				history.replaceState({}, "", `?athlete=${id}`)
 			}
-			const athleteSrc = `/athletes/${id}-big`
+			const athleteSrc = `https://res.cloudinary.com/dliqpogct/image/upload/f_auto,q_auto/v1/hellbound/${id}-big`
 
 			athleteImage.getElementsByTagName("img")[0].src = `${athleteSrc}.webp`
 			athleteTitle.innerHTML = spanNames
@@ -289,9 +291,6 @@ const selectedAthlete = listOfAthletes.find(({id}) => id === selectedAthleteId) 
     section{
       margin-top: 5rem;
       margin-bottom: 5rem;
-    }
-    article{
-      /* position: absolute; */
     }
     .athletes-div {
       position: relative;

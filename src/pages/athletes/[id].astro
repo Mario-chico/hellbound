@@ -15,7 +15,7 @@ const [athlete] = ATHLETES.filter((athlete) => athlete.id === id);
 const preloadAthleteImage: Preload[] = [
   {
     as: "image",
-    href: `/athletes/${id}-big.webp`,
+    href: `https://res.cloudinary.com/dliqpogct/image/upload/f_auto,q_auto/v1/hellbound/${id}-big.webp`,
     type: "image/webp",
     rel: "preload",
   },
@@ -24,9 +24,29 @@ export const prerender = true
 ---
 <Layout title={`${athlete.name} - Hellbound Cup`} description="El evento mas perro alv" preload={preloadAthleteImage}>
   <main>
-    <AthleteBigImage 
-      id={id}
-      name={athlete.name}
-      loading="eager" />
+    <section>
+      <p>Atleta <span>{athlete.name}</span></p>
+      <AthleteBigImage 
+        id={id}
+        name={athlete.name}
+        loading="eager" />
+    </section>
+    <p>Categoria <span>{athlete.category}</span></p>
+    <p>Peso <span>{athlete.weight}</span></p>
   </main>
 </Layout>
+<style>
+	main {
+		padding: 1rem;
+		max-width: 72rem;
+		min-height: 100vh;
+		margin: 0 auto;
+		color: white;
+		font-size: 20px;
+		line-height: 1.6;
+		position: relative;
+	}
+  section {
+    max-width: 300px;
+  }
+</style>
